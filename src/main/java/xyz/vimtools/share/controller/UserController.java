@@ -60,4 +60,10 @@ public class UserController {
 
         return ResponseInfo.buildErrorResponseInfo();
     }
+
+    @RequestMapping(path = "test", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseInfo test() {
+        return ResponseInfo.buildSuccessResponseInfo();
+    }
 }

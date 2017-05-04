@@ -72,8 +72,8 @@ public class UserController extends LoginHelper {
     /**
      * 用户登出
      */
-    @RequestMapping(path = "loginOut", method = RequestMethod.GET)
-    public ResponseInfo loginOut() {
+    @RequestMapping(path = "logout", method = RequestMethod.GET)
+    public ResponseInfo logout() {
         getSession().removeAttribute(CURRENT_USER);
         return ResponseInfo.buildSuccessResponseInfo();
     }

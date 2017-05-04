@@ -2,6 +2,7 @@ package xyz.vimtools.share.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import xyz.vimtools.share.dao.UserDao;
 import xyz.vimtools.share.domain.model.User;
 
@@ -12,6 +13,7 @@ import xyz.vimtools.share.domain.model.User;
  */
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired

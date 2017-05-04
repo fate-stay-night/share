@@ -4,9 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import xyz.vimtools.share.domain.model.User;
-import xyz.vimtools.share.service.UserService;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,36 +18,25 @@ import javax.servlet.http.HttpSession;
 @Component
 public class LoginHelper {
 
-    /** session有效期，默认1800s */
-    private static final Integer DEFAULT_MAX_INTERVAL = 1800;
+//    /** session有效期，默认1800s */
+//    private static final Integer DEFAULT_MAX_INTERVAL = 1800;
 
-    private static final String CURRENT_USER_ID = "user";
-
-    @Resource
-    private UserService userService;
+    private static final String CURRENT_USER = "user";
 
     /**
      * 保存当前用户到session
      */
-    public void setCurrentUser(String userId){
+    public void setCurrentUser(User user){
         HttpSession httpSession = getSession();
-        httpSession.setMaxInactiveInterval(DEFAULT_MAX_INTERVAL);
-        httpSession.setAttribute(CURRENT_USER_ID, userId);
-    }
-
-    /**
-     * 从session中获取当前用户Id
-     */
-    public String getCurrentUserId() {
-        return (String) getSession().getAttribute(CURRENT_USER_ID);
+//        httpSession.setMaxInactiveInterval(DEFAULT_MAX_INTERVAL);
+        httpSession.setAttribute(CURRENT_USER, user);
     }
 
     /**
      * 从session中获取当前用户信息
      */
     public User getCurrentUser() {
-        String userId = (String) getSession().getAttribute(CURRENT_USER_ID);
-        return userService.findById(userId);
+        return  (User) getSession().getAttribute(CURRENT_USER);
     }
 
     public HttpSession getSession() {
@@ -62,6 +49,6 @@ public class LoginHelper {
      * 是否为登陆用户
      */
     public Boolean isLoginUser() {
-        return getCurrentUserId() != null;
+        return getCurrentUser() != null;
     }
 }

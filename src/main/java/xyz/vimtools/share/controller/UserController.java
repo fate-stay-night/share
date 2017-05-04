@@ -54,7 +54,7 @@ public class UserController extends LoginHelper {
         AssertUtils.notNull(GlobalCode.PARAM_EXCEPTION, user);
 
         if (password.equals(user.getPassword())) {
-            setCurrentUser(user.getId());
+            setCurrentUser(user);
             ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();
             responseInfo.putData("user", user);
             return responseInfo;

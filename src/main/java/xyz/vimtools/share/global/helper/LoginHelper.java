@@ -21,7 +21,7 @@ public class LoginHelper {
 //    /** session有效期，默认1800s */
 //    private static final Integer DEFAULT_MAX_INTERVAL = 1800;
 
-    private static final String CURRENT_USER = "user";
+    public static final String CURRENT_USER = "user";
 
     /**
      * 保存当前用户到session

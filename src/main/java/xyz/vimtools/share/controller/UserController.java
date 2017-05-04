@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping(path = "user")
+@ResponseBody
 public class UserController extends LoginHelper {
 
     @Resource
@@ -34,7 +35,6 @@ public class UserController extends LoginHelper {
      * @return 用户id
      */
     @RequestMapping(path = "", method = RequestMethod.POST)
-    @ResponseBody
     public ResponseInfo createUser(@RequestBody User user) {
 
         AssertUtils.notNull(GlobalCode.PARAM_EXCEPTION, user);
@@ -44,8 +44,14 @@ public class UserController extends LoginHelper {
         return ResponseInfo.buildErrorResponseInfo();
     }
 
+    /**
+     * 用户登录
+     *
+     * @param email 登录邮箱
+     * @param password 登录密码
+     * @return 用户信息
+     */
     @RequestMapping(path = "login", method = RequestMethod.GET)
-    @ResponseBody
     public ResponseInfo login(@RequestParam String email, @RequestParam String password) {
 
         AssertUtils.notNull(GlobalCode.PARAM_EXCEPTION, email, password);
@@ -63,8 +69,16 @@ public class UserController extends LoginHelper {
         return ResponseInfo.buildErrorResponseInfo();
     }
 
+    /**
+     * 用户登出
+     */
+    @RequestMapping(path = "loginOut", method = RequestMethod.GET)
+    public ResponseInfo loginOut() {
+        getSession().removeAttribute(CURRENT_USER);
+        return ResponseInfo.buildSuccessResponseInfo();
+    }
+
     @RequestMapping(path = "test", method = RequestMethod.GET)
-    @ResponseBody
     public ResponseInfo test() {
         User currentUser = getCurrentUser();
         ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();

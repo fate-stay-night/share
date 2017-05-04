@@ -1,14 +1,16 @@
 package xyz.vimtools.share.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.vimtools.share.domain.model.User;
 import xyz.vimtools.share.global.code.GlobalCode;
 import xyz.vimtools.share.global.code.UserCode;
+import xyz.vimtools.share.global.helper.LoginHelper;
 import xyz.vimtools.share.global.response.ResponseInfo;
 import xyz.vimtools.share.service.UserService;
 import xyz.vimtools.share.util.AssertUtils;
 import xyz.vimtools.share.util.RegexUtils;
+
+import javax.annotation.Resource;
 
 /**
  * 用户控制层
@@ -20,9 +22,9 @@ import xyz.vimtools.share.util.RegexUtils;
 
 @RestController
 @RequestMapping(path = "user")
-public class UserController {
+public class UserController extends LoginHelper {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     /**
@@ -49,10 +51,10 @@ public class UserController {
         AssertUtils.notNull(GlobalCode.PARAM_EXCEPTION, email, password);
         AssertUtils.isTrue(UserCode.EMAIL_FORMAT_ERROR, RegexUtils.isEmail(email));
         User user = userService.findByEmail(email);
-
-        //todo 校验user
+        AssertUtils.notNull(GlobalCode.PARAM_EXCEPTION, user);
 
         if (password.equals(user.getPassword())) {
+            setCurrentUser(user.getId());
             ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();
             responseInfo.putData("user", user);
             return responseInfo;
@@ -64,6 +66,9 @@ public class UserController {
     @RequestMapping(path = "test", method = RequestMethod.GET)
     @ResponseBody
     public ResponseInfo test() {
-        return ResponseInfo.buildSuccessResponseInfo();
+        User currentUser = getCurrentUser();
+        ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();
+        responseInfo.putData("user", currentUser);
+        return responseInfo;
     }
 }

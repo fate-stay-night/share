@@ -50,7 +50,6 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
                 .addPathPatterns("/**")
                 .excludePathPatterns(
                         "/",
-                        "/user",
                         "/user/login"
                 );
     }

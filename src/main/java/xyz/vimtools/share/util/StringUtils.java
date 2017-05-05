@@ -22,7 +22,63 @@ public class StringUtils {
     private static final int PAD_LIMIT = 8192;
     private static final Pattern WHITESPACE_BLOCK = Pattern.compile("\\s+");
 
+    public static Character[] chars = new Character[]{
+            Character.valueOf('a'), Character.valueOf('b'), Character.valueOf('c'),
+            Character.valueOf('d'), Character.valueOf('e'), Character.valueOf('f'),
+            Character.valueOf('g'), Character.valueOf('h'), Character.valueOf('i'),
+            Character.valueOf('j'), Character.valueOf('k'), Character.valueOf('l'),
+            Character.valueOf('m'), Character.valueOf('n'), Character.valueOf('o'),
+            Character.valueOf('p'), Character.valueOf('q'), Character.valueOf('r'),
+            Character.valueOf('s'), Character.valueOf('t'), Character.valueOf('u'),
+            Character.valueOf('v'), Character.valueOf('w'), Character.valueOf('x'),
+            Character.valueOf('y'), Character.valueOf('z'), Character.valueOf('0'),
+            Character.valueOf('1'), Character.valueOf('2'), Character.valueOf('3'),
+            Character.valueOf('4'), Character.valueOf('5'), Character.valueOf('6'),
+            Character.valueOf('7'), Character.valueOf('8'), Character.valueOf('9'),
+            Character.valueOf('A'), Character.valueOf('B'), Character.valueOf('C'),
+            Character.valueOf('D'), Character.valueOf('E'), Character.valueOf('F'),
+            Character.valueOf('G'), Character.valueOf('H'), Character.valueOf('I'),
+            Character.valueOf('J'), Character.valueOf('K'), Character.valueOf('L'),
+            Character.valueOf('M'), Character.valueOf('N'), Character.valueOf('O'),
+            Character.valueOf('P'), Character.valueOf('Q'), Character.valueOf('R'),
+            Character.valueOf('S'), Character.valueOf('T'), Character.valueOf('U'),
+            Character.valueOf('V')};
+    public static Character[] numbers = new Character[]{
+            Character.valueOf('0'), Character.valueOf('1'), Character.valueOf('2'),
+            Character.valueOf('3'), Character.valueOf('4'), Character.valueOf('5'),
+            Character.valueOf('6'), Character.valueOf('7'), Character.valueOf('8'),
+            Character.valueOf('9')};
+
     public StringUtils() {
+    }
+
+    /**
+     * 获得32位字符串
+     */
+    public static String getUUID() {
+        return UUID.randomUUID().toString().replace("-","");
+    }
+
+    public static String getUUID(int length) {
+        Random random = new Random();
+        StringBuffer buffer = new StringBuffer();
+
+        for(int i = 0; i < length; ++i) {
+            buffer.append(chars[random.nextInt(chars.length)]);
+        }
+
+        return buffer.toString();
+    }
+
+    public static String getNumberUUID(int length) {
+        Random random = new Random();
+        StringBuffer buffer = new StringBuffer();
+
+        for(int i = 0; i < length; ++i) {
+            buffer.append(numbers[random.nextInt(numbers.length)]);
+        }
+
+        return buffer.toString();
     }
 
     public static boolean isEmpty(CharSequence cs) {

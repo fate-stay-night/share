@@ -8,6 +8,7 @@ import xyz.vimtools.share.global.helper.LoginHelper;
 import xyz.vimtools.share.global.response.ResponseInfo;
 import xyz.vimtools.share.service.UserService;
 import xyz.vimtools.share.util.AssertUtils;
+import xyz.vimtools.share.util.EncryptUtils;
 import xyz.vimtools.share.util.RegexUtils;
 
 import javax.annotation.Resource;
@@ -39,9 +40,11 @@ public class UserController extends LoginHelper {
 
         AssertUtils.notNull(GlobalCode.PARAM_EXCEPTION, user);
         AssertUtils.isTrue(UserCode.EMAIL_FORMAT_ERROR, RegexUtils.isEmail(user.getEmail()));
-
-        userService.addUser(user);
-        return ResponseInfo.buildErrorResponseInfo();
+        user.setPassword(EncryptUtils.SHA256(user.getPassword()));
+        String userId = userService.addUser(user);
+        ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();
+        responseInfo.putData("id", userId);
+        return responseInfo;
     }
 
     /**
@@ -59,7 +62,7 @@ public class UserController extends LoginHelper {
         User user = userService.findByEmail(email);
         AssertUtils.notNull(GlobalCode.PARAM_EXCEPTION, user);
 
-        if (password.equals(user.getPassword())) {
+        if (EncryptUtils.SHA256(password).equals(user.getPassword())) {
             setCurrentUser(user);
             ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();
             responseInfo.putData("user", user);

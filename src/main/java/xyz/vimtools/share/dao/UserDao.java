@@ -2,6 +2,7 @@ package xyz.vimtools.share.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
+import xyz.vimtools.share.domain.mapper.User1Mapper;
 import xyz.vimtools.share.domain.mapper.UserMapper;
 import xyz.vimtools.share.domain.model.User;
 import xyz.vimtools.share.domain.model.UserExample;
@@ -23,10 +24,17 @@ public class UserDao {
     @Resource
     private UserMapper userMapper;
 
+    @Resource
+    private User1Mapper user1Mapper;
+
     public String insert(User user) {
         //这里设置了数据库email唯一，所以在插入时要捕获email不唯一的异常
         try {
-            userMapper.insert(user);
+            if (user.getEmail().hashCode() % 2 == 1) {
+                userMapper.insert(user);
+            } else {
+                user1Mapper.insert(user);
+            }
         } catch (Exception e) {
             ExceptionUtils.throwResponseException(UserCode.HAVE_EXIST);
         }

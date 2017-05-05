@@ -1,21 +1,11 @@
 package xyz.vimtools.share.domain.mapper;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.DeleteProvider;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 import xyz.vimtools.share.domain.model.User;
 import xyz.vimtools.share.domain.model.UserExample;
+
+import java.util.List;
 
 public interface UserMapper {
     @SelectProvider(type=UserSqlProvider.class, method="countByExample")
@@ -32,9 +22,11 @@ public interface UserMapper {
 
     @Insert({
         "insert into user (id, email, ",
-        "password, nickname)",
+        "password, nickname, ",
+        "create_time, update_time)",
         "values (#{id,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, ",
-        "#{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR})"
+        "#{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, ",
+        "#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT replace(UUID(), '-', '')", keyProperty="id", before=true, resultType=String.class)
     int insert(User record);
@@ -48,13 +40,15 @@ public interface UserMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
         @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-        @Result(column="nickname", property="nickname", jdbcType=JdbcType.VARCHAR)
+        @Result(column="nickname", property="nickname", jdbcType=JdbcType.VARCHAR),
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
     List<User> selectByExample(UserExample example);
 
     @Select({
         "select",
-        "id, email, password, nickname",
+        "id, email, password, nickname, create_time, update_time",
         "from user",
         "where id = #{id,jdbcType=VARCHAR}"
     })
@@ -62,7 +56,9 @@ public interface UserMapper {
         @Result(column="id", property="id", jdbcType=JdbcType.VARCHAR, id=true),
         @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
         @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-        @Result(column="nickname", property="nickname", jdbcType=JdbcType.VARCHAR)
+        @Result(column="nickname", property="nickname", jdbcType=JdbcType.VARCHAR),
+        @Result(column="create_time", property="createTime", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="update_time", property="updateTime", jdbcType=JdbcType.TIMESTAMP)
     })
     User selectByPrimaryKey(String id);
 
@@ -79,7 +75,9 @@ public interface UserMapper {
         "update user",
         "set email = #{email,jdbcType=VARCHAR},",
           "password = #{password,jdbcType=VARCHAR},",
-          "nickname = #{nickname,jdbcType=VARCHAR}",
+          "nickname = #{nickname,jdbcType=VARCHAR},",
+          "create_time = #{createTime,jdbcType=TIMESTAMP},",
+          "update_time = #{updateTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=VARCHAR}"
     })
     int updateByPrimaryKey(User record);

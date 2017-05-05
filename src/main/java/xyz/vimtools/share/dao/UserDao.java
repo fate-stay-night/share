@@ -12,6 +12,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 用户Dao层
+ *
  * @author zhangzheng
  * @version 1.0.0
  * @date 2017-4-25
@@ -46,5 +48,9 @@ public class UserDao {
             return userList.get(0);
         }
         return null;
+    }
+
+    public int updateNickName(User user) {
+        return userMapper.updateByPrimaryKey(user);
     }
 }

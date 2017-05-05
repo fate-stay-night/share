@@ -42,6 +42,14 @@ public class UserSqlProvider {
             sql.VALUES("nickname", "#{nickname,jdbcType=VARCHAR}");
         }
         
+        if (record.getCreateTime() != null) {
+            sql.VALUES("create_time", "#{createTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.VALUES("update_time", "#{updateTime,jdbcType=TIMESTAMP}");
+        }
+        
         return sql.toString();
     }
 
@@ -55,6 +63,8 @@ public class UserSqlProvider {
         sql.SELECT("email");
         sql.SELECT("password");
         sql.SELECT("nickname");
+        sql.SELECT("create_time");
+        sql.SELECT("update_time");
         sql.FROM("user");
         applyWhere(sql, example, false);
         
@@ -88,6 +98,14 @@ public class UserSqlProvider {
             sql.SET("nickname = #{record.nickname,jdbcType=VARCHAR}");
         }
         
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
+        }
+        
         applyWhere(sql, example, true);
         return sql.toString();
     }
@@ -100,6 +118,8 @@ public class UserSqlProvider {
         sql.SET("email = #{record.email,jdbcType=VARCHAR}");
         sql.SET("password = #{record.password,jdbcType=VARCHAR}");
         sql.SET("nickname = #{record.nickname,jdbcType=VARCHAR}");
+        sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
+        sql.SET("update_time = #{record.updateTime,jdbcType=TIMESTAMP}");
         
         UserExample example = (UserExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -120,6 +140,14 @@ public class UserSqlProvider {
         
         if (record.getNickname() != null) {
             sql.SET("nickname = #{nickname,jdbcType=VARCHAR}");
+        }
+        
+        if (record.getCreateTime() != null) {
+            sql.SET("create_time = #{createTime,jdbcType=TIMESTAMP}");
+        }
+        
+        if (record.getUpdateTime() != null) {
+            sql.SET("update_time = #{updateTime,jdbcType=TIMESTAMP}");
         }
         
         sql.WHERE("id = #{id,jdbcType=VARCHAR}");

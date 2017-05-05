@@ -12,6 +12,7 @@ import xyz.vimtools.share.util.EncryptUtils;
 import xyz.vimtools.share.util.RegexUtils;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * 用户控制层
@@ -41,9 +42,42 @@ public class UserController extends LoginHelper {
         AssertUtils.notNull(GlobalCode.PARAM_EXCEPTION, user);
         AssertUtils.isTrue(UserCode.EMAIL_FORMAT_ERROR, RegexUtils.isEmail(user.getEmail()));
         user.setPassword(EncryptUtils.SHA256(user.getPassword()));
+        user.setCreateTime(new Date());
         String userId = userService.addUser(user);
         ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();
         responseInfo.putData("id", userId);
+        return responseInfo;
+    }
+
+    /**
+     * 修改用户密码
+     *
+     * @param password 新的密码
+     * @return 修改成功
+     */
+    @RequestMapping(path = "password", method = RequestMethod.PUT)
+    public ResponseInfo changePassword(@RequestParam String password) {
+        User user = getCurrentUser();
+        user.setPassword(EncryptUtils.SHA256(password));
+        user.setUpdateTime(new Date());
+        userService.modifyUser(user);
+        return ResponseInfo.buildSuccessResponseInfo();
+    }
+
+    /**
+     * 修改用户昵称
+     *
+     * @param nickname 新的昵称
+     * @return userDto 修改后的用户对象
+     */
+    @RequestMapping(path = "", method = RequestMethod.PUT)
+    public ResponseInfo editUser(@RequestParam String nickname) {
+        User user = getCurrentUser();
+        user.setNickname(nickname);
+        user.setUpdateTime(new Date());
+        userService.modifyUser(user);
+        ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();
+        responseInfo.putData("user", userService.toDto(user));
         return responseInfo;
     }
 
@@ -65,7 +99,7 @@ public class UserController extends LoginHelper {
         if (EncryptUtils.SHA256(password).equals(user.getPassword())) {
             setCurrentUser(user);
             ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();
-            responseInfo.putData("user", user);
+            responseInfo.putData("user", userService.toDto(user));
             return responseInfo;
         }
 
@@ -85,7 +119,7 @@ public class UserController extends LoginHelper {
     public ResponseInfo test() {
         User currentUser = getCurrentUser();
         ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();
-        responseInfo.putData("user", currentUser);
+        responseInfo.putData("user", userService.toDto(currentUser));
         return responseInfo;
     }
 }

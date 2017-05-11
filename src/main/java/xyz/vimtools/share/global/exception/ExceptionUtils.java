@@ -16,7 +16,7 @@ import java.util.Arrays;
  */
 public class ExceptionUtils {
 
-    public static void throwResponseException(ErrorCode errorCode, String ... var) throws ResponseException {
+    public static void throwResponseException(ErrorCode errorCode, String... var) throws ResponseException {
         if (!CollectionUtils.isEmpty(Arrays.asList(var))) {
             String message = errorCode.getMessage();
             for (int i = 0; i < var.length; i++) {
@@ -29,10 +29,10 @@ public class ExceptionUtils {
     }
 
     public static String getTrace(Throwable t) {
-        StringWriter stringWriter= new StringWriter();
-        PrintWriter writer= new PrintWriter(stringWriter);
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter);
         t.printStackTrace(writer);
-        StringBuffer buffer= stringWriter.getBuffer();
+        StringBuffer buffer = stringWriter.getBuffer();
         return buffer.toString();
     }
 }

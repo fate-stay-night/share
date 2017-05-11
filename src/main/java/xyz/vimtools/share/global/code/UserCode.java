@@ -8,8 +8,7 @@ package xyz.vimtools.share.global.code;
 public enum UserCode implements ErrorCode {
 
     HAVE_EXIST(10001, "邮箱已存在"),
-    EMAIL_FORMAT_ERROR(10002, "邮箱格式不正确"),
-    ;
+    EMAIL_FORMAT_ERROR(10002, "邮箱格式不正确"),;
 
     /**
      * 状态码

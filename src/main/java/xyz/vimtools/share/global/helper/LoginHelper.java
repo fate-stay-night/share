@@ -26,7 +26,7 @@ public class LoginHelper {
     /**
      * 保存当前用户到session
      */
-    public void setCurrentUser(User user){
+    public void setCurrentUser(User user) {
         HttpSession httpSession = getSession();
 //        httpSession.setMaxInactiveInterval(DEFAULT_MAX_INTERVAL);
         httpSession.setAttribute(CURRENT_USER, user);
@@ -36,11 +36,11 @@ public class LoginHelper {
      * 从session中获取当前用户信息
      */
     public User getCurrentUser() {
-        return  (User) getSession().getAttribute(CURRENT_USER);
+        return (User) getSession().getAttribute(CURRENT_USER);
     }
 
     public HttpSession getSession() {
-        ServletRequestAttributes attributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         return request.getSession();
     }

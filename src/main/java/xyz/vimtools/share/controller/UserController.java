@@ -84,7 +84,7 @@ public class UserController extends LoginHelper {
     /**
      * 用户登录
      *
-     * @param email 登录邮箱
+     * @param email    登录邮箱
      * @param password 登录密码
      * @return 用户信息
      */

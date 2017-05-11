@@ -64,24 +64,27 @@ public class RegexUtils {
 
     /**
      * 匹配给定的字符串是否是一个邮箱账号，"www."可省略不写
+     *
      * @param text 给定的字符串
      * @return true：是
      */
-    public static boolean isEmail(String text){
+    public static boolean isEmail(String text) {
         return text.matches(EMAIL_REGEX);
     }
 
     /**
      * 匹配给定的字符串是否是一个手机号码，支持130——139、150——153、155——159、180、183、185、186、188、189号段
+     *
      * @param text 给定的字符串
      * @return true：是
      */
-    public static boolean isMobileNumber(String text){
+    public static boolean isMobileNumber(String text) {
         return text.matches(MOBILE_NUMBER_REGEX);
     }
 
     /**
      * 匹配给定的字符串是否是一个电话号码
+     *
      * @param text 给定的字符串
      * @return true：是
      */
@@ -91,28 +94,31 @@ public class RegexUtils {
 
     /**
      * 匹配给定的字符串是否是一个全网IP
+     *
      * @param text 给定的字符串
      * @return true：是
      */
-    public static boolean isIp(String text){
+    public static boolean isIp(String text) {
         return text.matches(IP_REGEX);
     }
 
     /**
      * 匹配给定的字符串是否全部由汉子组成
+     *
      * @param text 给定的字符串
      * @return true：是
      */
-    public static boolean isChinese(String text){
+    public static boolean isChinese(String text) {
         return text.matches(CHINESE_REGEX);
     }
 
     /**
      * 验证给定的字符串是否全部由正整数组成
+     *
      * @param text 给定的字符串
      * @return true：是
      */
-    public static boolean isPositiveInteger(String text){
+    public static boolean isPositiveInteger(String text) {
         return text.matches(POSITIVE_INTEGER_REGEX);
     }
 
@@ -135,33 +141,37 @@ public class RegexUtils {
      * <br>验证位 Y = [ 1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2 ]
      * <br>如果验证码恰好是10，为了保证身份证是十八位，那么第十八位将用X来代替 校验位计算公式：Y_P = mod( ∑(Ai×Wi),11 )
      * <br>i为身份证号码1...17 位; Y_P为校验码Y所在校验码数组位置
+     *
      * @param text 文本
      * @return boolean
      */
-    public static boolean isIdCard(String text){
+    public static boolean isIdCard(String text) {
         return text.matches(ID_CARD);
     }
 
     /**
      * 验证给定的字符串是否是邮编
+     *
      * @param text 文本
      * @return boolean
      */
-    public static boolean isZipCode(String text){
+    public static boolean isZipCode(String text) {
         return text.matches(ZIP_CODE);
     }
 
     /**
      * 验证给定的字符串是否是URL，仅支持http、https、ftp
+     *
      * @param text url字符串
      * @return boolean
      */
-    public static boolean isURL(String text){
+    public static boolean isURL(String text) {
         return text.matches(URL);
     }
 
     /**
      * 验证给定的字符串是否是数字
+     *
      * @param text url字符串
      * @return boolean
      */
@@ -171,6 +181,7 @@ public class RegexUtils {
 
     /**
      * 只能输入字母和汉字 这个返回的是过滤之后的字符串
+     *
      * @param text 文字
      * @return String
      */

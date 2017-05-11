@@ -2,7 +2,6 @@ package xyz.vimtools.share.util;
 
 import xyz.vimtools.share.global.code.ErrorCode;
 import xyz.vimtools.share.global.exception.ExceptionUtils;
-import xyz.vimtools.share.global.exception.ResponseException;
 
 import java.util.Collection;
 import java.util.Map;
@@ -21,11 +20,10 @@ public class AssertUtils {
     private AssertUtils() {}
 
     /**
-     * Assert args is null, if not null throw new {@link ResponseException}
-     * use errorCode {@link ErrorCode}
+     * 断言为null
      *
-     * @param errorCode response info
-     * @param args need Assert args value
+     * @param errorCode 错误码
+     * @param args      断言参数
      */
     public static void isNull(ErrorCode errorCode, Object ... args) {
         if (null == args) {
@@ -48,11 +46,10 @@ public class AssertUtils {
     }
 
     /**
-     * Assert args is not null,if null throw new {@link ResponseException}
-     * use errorCode {@link ErrorCode}
+     * 断言不为null
      *
-     * @param errorCode response info
-     * @param args need Assert args value
+     * @param errorCode 错误码
+     * @param args      断言参数
      */
     public static void notNull(ErrorCode errorCode, Object ... args) {
         if (null == args) {
@@ -75,12 +72,10 @@ public class AssertUtils {
     }
 
     /**
-     * Assert a boolean expression, throwing {@link ResponseException}
-     * if the test context is {@code false}.
-     * <pre class="code">Assert.isTrue(i &gt; 0, "The value must be greater than zero");</pre>
+     * 断言为真
      *
-     * @param errorCode response info
-     * @param expression need Assert boolean expression
+     * @param errorCode  错误码
+     * @param expression 断言条件
      */
     public static void isTrue(ErrorCode errorCode, boolean expression) {
         if (!expression) {
@@ -89,12 +84,10 @@ public class AssertUtils {
     }
 
     /**
-     * Assert text must be match the patter
-     * if the match the patter context false.
-     * throw new {@link ResponseException}
+     * 断言为数字
      *
-     * @param errorCode response info
-     * @param text Assert text
+     * @param errorCode 错误码
+     * @param text      数字
      */
     public static void isNumber(ErrorCode errorCode, String text) {
         if(StringUtils.isBlank(text))
@@ -104,12 +97,10 @@ public class AssertUtils {
     }
 
     /**
-     * Assert mobile must be match the patter
-     * if the match the patter context false.
-     * throw new {@link ResponseException}
+     * 断言为手机号
      *
-     * @param errorCode response info
-     * @param text Assert text
+     * @param errorCode 错误码
+     * @param text      手机号
      */
     public static void isMobile(ErrorCode errorCode, String text) {
         if(StringUtils.isBlank(text))
@@ -119,12 +110,10 @@ public class AssertUtils {
     }
 
     /**
-     * Assert id card must be match the patter
-     * if the match the patter context false.
-     * throw new {@link ResponseException}
+     * 断言为身份证号
      *
-     * @param errorCode response info
-     * @param text Assert text
+     * @param errorCode 错误码
+     * @param text      身份证号
      */
     public static void isIdCard(ErrorCode errorCode, String text) {
         if(StringUtils.isBlank(text))
@@ -135,12 +124,10 @@ public class AssertUtils {
     }
 
     /**
-     * Assert tel phone must be match the patter
-     * if the match the patter context false.
-     * throw new {@link ResponseException}
+     * 断言为电话号码
      *
-     * @param errorCode response info
-     * @param text Assert text
+     * @param errorCode 错误码
+     * @param text      电话号码
      */
     public static void isTelPhone(ErrorCode errorCode, String text) {
         if(StringUtils.isBlank(text))
@@ -150,12 +137,10 @@ public class AssertUtils {
     }
 
     /**
-     * Assert zip code must be match the patter
-     * if the match the patter context false.
-     * throw new {@link ResponseException}
+     * 断言为邮编
      *
-     * @param errorCode response info
-     * @param text Assert text
+     * @param errorCode 错误码
+     * @param text      邮编
      */
     public static void isZipCode(ErrorCode errorCode, String text) {
         if(StringUtils.isBlank(text))
@@ -165,12 +150,10 @@ public class AssertUtils {
     }
 
     /**
-     * Assert Chinese characters must be match the patter
-     * if the match the patter context false.
-     * throw new {@link ResponseException}
+     * 断言为汉字
      *
-     * @param errorCode response info
-     * @param text Assert text
+     * @param errorCode 错误码
+     * @param text      汉字
      */
     public static void isChinese(ErrorCode errorCode, String text) {
         if(StringUtils.isBlank(text))
@@ -180,12 +163,10 @@ public class AssertUtils {
     }
 
     /**
-     * Assert email must be match the patter
-     * if the match the patter context false.
-     * throw new {@link ResponseException}
+     * 断言为邮箱
      *
-     * @param errorCode response info
-     * @param text Assert text
+     * @param errorCode 错误码
+     * @param text      email
      */
     public static void isEmail(ErrorCode errorCode, String text) {
         if(StringUtils.isBlank(text))
@@ -195,12 +176,11 @@ public class AssertUtils {
     }
 
     /**
-     * Assert object must be in the objects
-     * throw new {@link ResponseException}
+     * 断言对象在集合中
      *
-     * @param errorCode response info
-     * @param object Assert object
-     * @param objects Assert objects
+     * @param errorCode 错误码
+     * @param object    对象
+     * @param objects   对象集合
      */
     public static void isInclude(ErrorCode errorCode, Object object, Object ... objects) {
         if (null == objects || null == object) {

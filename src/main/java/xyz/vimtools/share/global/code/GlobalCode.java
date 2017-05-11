@@ -16,8 +16,7 @@ public enum GlobalCode implements ErrorCode {
     SERVER_EXCEPTION(500, "服务器异常!"),
     ILLEGAL_OPERATE(900, "非法操作!"),
     PARAM_EXCEPTION(1000, "参数异常!"),
-    EXIST_CASCADE(2000, "存在级联!")
-    ;
+    EXIST_CASCADE(2000, "存在级联!");
 
     /**
      * 状态码

@@ -44,7 +44,8 @@ public class JsonUtils {
 
     /**
      * json转对象
-     * @param json json字符串
+     *
+     * @param json      json字符串
      * @param valueType 对象类
      * @return 对象
      */
@@ -54,7 +55,7 @@ public class JsonUtils {
 
     public static <T> T jsonToObject(String json, Class<T> valueType, boolean uppercase) {
         ObjectMapper mapper = new ObjectMapper();
-        if(uppercase) {
+        if (uppercase) {
             mapper.setPropertyNamingStrategy(new PropertyNamingStrategy() {
                 private static final long serialVersionUID = 1L;
 
@@ -95,7 +96,7 @@ public class JsonUtils {
         CollectionType collectionType = typeFactory.constructCollectionType(List.class, valueType);
 
         try {
-            return (List)mapper.readValue(json, collectionType);
+            return (List) mapper.readValue(json, collectionType);
         } catch (Exception var6) {
             var6.printStackTrace();
             return null;
@@ -108,7 +109,7 @@ public class JsonUtils {
         CollectionType collectionType = typeFactory.constructCollectionType(Set.class, valueType);
 
         try {
-            return (Set)mapper.readValue(json, collectionType);
+            return (Set) mapper.readValue(json, collectionType);
         } catch (Exception var6) {
             var6.printStackTrace();
             return null;
@@ -121,7 +122,7 @@ public class JsonUtils {
         MapType mapType = typeFactory.constructMapType(Map.class, keyType, valueType);
 
         try {
-            return (Map)mapper.readValue(json, mapType);
+            return (Map) mapper.readValue(json, mapType);
         } catch (Exception var7) {
             var7.printStackTrace();
             return null;

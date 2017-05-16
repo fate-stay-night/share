@@ -1,5 +1,7 @@
 package xyz.vimtools.share.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import xyz.vimtools.share.domain.model.ext.UserDto;
 @Service
 @Transactional
 public class UserService {
+
+    private static Logger log = LogManager.getLogger(UserService.class);
 
     @Autowired
     private UserDao userDao;
@@ -42,6 +46,7 @@ public class UserService {
     public UserDto toDto(User user) {
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(user, userDto);
+        log.info("用户信息 : {}", userDto.toString());
         return userDto;
     }
 }

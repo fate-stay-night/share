@@ -22,14 +22,16 @@ public enum PokerType {
         this.type = type;
     }
 
+    /**
+     * 炸金花三张牌组合成的类型
+     */
     private final String type;
 
     public String getType() {
         return type;
     }
 
-    public PokerType getPokerType(String type) {
-
+    public static PokerType getPokerType(String type) {
         for (PokerType pokerType : PokerType.values()) {
             if (pokerType.getType().equals(type)) {
                 return pokerType;

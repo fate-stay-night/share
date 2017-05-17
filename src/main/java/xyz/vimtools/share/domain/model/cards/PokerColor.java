@@ -1,8 +1,8 @@
 package xyz.vimtools.share.domain.model.cards;
 
 /**
- * 扑克牌花色
- * 黑桃（Spade）、红桃（Heart）、梅花（Club）、方块（Diamond）
+ * 扑克牌花色(从小到大)
+ * 方块（Diamond）、梅花（Club）、红桃（Heart）、黑桃（Spade）
  *
  * @author zhangzheng
  * @version 1.0.0
@@ -10,12 +10,15 @@ package xyz.vimtools.share.domain.model.cards;
  */
 public enum PokerColor {
 
-    SPADE("S"),
-    HEART("H"),
-    CLUB("C"),
     DIAMOND("D"),
+    CLUB("C"),
+    HEART("H"),
+    SPADE("S"),
     ;
 
+    /**
+     * 扑克牌花色
+     */
     private final String color;
 
     PokerColor(String color) {
@@ -26,7 +29,7 @@ public enum PokerColor {
         return color;
     }
 
-    public PokerColor getPokerColor(String color) {
+    public static PokerColor getPokerColor(String color) {
         for (PokerColor pokerColor : PokerColor.values()) {
             if (pokerColor.getColor().equals(color)) {
                 return pokerColor;

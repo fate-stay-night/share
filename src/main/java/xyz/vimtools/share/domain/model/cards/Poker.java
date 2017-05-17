@@ -19,9 +19,9 @@ public class Poker implements Comparable<Poker> {
      */
     private PokerColor pokerColor;
 
-    Poker(String s) {
-        this.pokerPoint = PokerPoint.valueOf(s.substring(0, 1));
-        this.pokerColor = PokerColor.valueOf(s.substring(1, 2));
+    public Poker(String s) {
+        this.pokerPoint = PokerPoint.getPokerPoint(s.substring(0, 1));
+        this.pokerColor = PokerColor.getPokerColor(s.substring(1, 2));
     }
 
     public PokerPoint getPokerPoint() {

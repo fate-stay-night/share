@@ -2,6 +2,7 @@ package xyz.vimtools.share.domain.model;
 
 import xyz.vimtools.share.domain.model.cards.Poker;
 import xyz.vimtools.share.domain.model.cards.PokerType;
+import xyz.vimtools.share.util.PokerUtils;
 
 import java.util.List;
 
@@ -28,6 +29,16 @@ public class Player implements Comparable<Player> {
      * 所拥有的牌类型
      */
     private PokerType pokerType;
+
+    /**
+     * 默认构造函数，每个玩家默认有三张牌
+     *
+     * @param pokerList 扑克牌list
+     */
+    public Player(List<Poker> pokerList) {
+        this.pokerList = pokerList;
+        this.pokerType = PokerUtils.pokerType(pokerList);
+    }
 
     public User getUser() {
         return user;

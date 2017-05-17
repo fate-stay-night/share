@@ -23,22 +23,27 @@ public class PokerUtils {
      * @return PokerType
      */
     public static PokerType pokerType(List<Poker> pokerList) {
+        //豹子
         if (isBaoZi(pokerList)) {
 
             return PokerType.BAO_ZI;
-
+        //顺金
         } else if (isShunJin(pokerList)) {
 
             return PokerType.SHUN_JIN;
+        //金花
+        } else if (isJinHua(pokerList)) {
 
+            return PokerType.JIN_HUA;
+        //顺子
         } else if (isShunZi(pokerList)) {
 
             return PokerType.SHUN_ZI;
-
+        //对子
         } else if (isDuiZi(pokerList)) {
 
             return PokerType.DUI_ZI;
-
+        //散牌
         } else {
 
             return PokerType.SAN_PAI;

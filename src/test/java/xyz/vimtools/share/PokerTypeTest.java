@@ -21,8 +21,8 @@ public class PokerTypeTest {
     public void typeTest() {
         List<Poker> pokers = new ArrayList<>();
         pokers.add(new Poker("AS"));
-        pokers.add(new Poker("KS"));
-        pokers.add(new Poker("AC"));
+        pokers.add(new Poker("2S"));
+        pokers.add(new Poker("3C"));
 
         PokerType pokerType = PokerUtils.pokerType(pokers);
         System.out.println(pokerType.getType());

@@ -6,6 +6,7 @@ import xyz.vimtools.share.domain.model.cards.PokerType;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 扑克牌公有类
@@ -116,6 +117,15 @@ public class PokerUtils {
         Collections.sort(pokerList);
         if (CollectionUtils.isEmpty(pokerList)) {
             return Boolean.FALSE;
+        }
+
+        //顺子A23特殊处理
+        List<Integer> list = pokerList
+                .stream()
+                .map(poker -> poker.getPokerPoint().getIndex())
+                .collect(Collectors.toList());
+        if (list.contains(2) && list.contains(3) && list.contains(14)) {
+            return Boolean.TRUE;
         }
 
         for (int i = 0; i < pokerList.size() - 1; i++) {

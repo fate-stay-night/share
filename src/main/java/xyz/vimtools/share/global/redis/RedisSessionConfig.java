@@ -1,4 +1,4 @@
-package xyz.vimtools.share.global.session;
+package xyz.vimtools.share.global.redis;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
@@ -13,4 +13,6 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @Configuration
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 3600, redisNamespace = "share")
 public class RedisSessionConfig {
+
+
 }

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import xyz.vimtools.share.domain.model.User;
 import xyz.vimtools.share.global.code.GlobalCode;
 import xyz.vimtools.share.global.code.UserCode;
+import xyz.vimtools.share.global.constant.RedisKeyConstant;
 import xyz.vimtools.share.global.helper.LoginHelper;
+import xyz.vimtools.share.global.redis.RedisHandle;
 import xyz.vimtools.share.global.response.ResponseInfo;
 import xyz.vimtools.share.service.UserService;
 import xyz.vimtools.share.util.AssertUtils;
@@ -34,6 +36,9 @@ public class UserController extends LoginHelper {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private RedisHandle redisHandle;
 
     /**
      * 用户注册接口
@@ -109,6 +114,9 @@ public class UserController extends LoginHelper {
             setCurrentUser(user);
             ResponseInfo responseInfo = ResponseInfo.buildSuccessResponseInfo();
             responseInfo.putData("user", userService.toDto(user));
+
+            redisHandle.set(RedisKeyConstant.MOBILE_CODE + email, user);
+
             return responseInfo;
         }
 

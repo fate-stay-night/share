@@ -1,5 +1,9 @@
 package xyz.vimtools.share.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import xyz.vimtools.share.domain.model.User;
 import xyz.vimtools.share.global.code.GlobalCode;
@@ -23,8 +27,9 @@ import java.util.Date;
  */
 
 @RestController
+@Transactional  //使用事务
 @RequestMapping(path = "user")
-@ResponseBody
+@Api(value = "用户接口")
 public class UserController extends LoginHelper {
 
     @Resource
@@ -36,6 +41,7 @@ public class UserController extends LoginHelper {
      * @param user 用户信息
      * @return 用户id
      */
+    @ApiOperation(value = "用户注册接口", response = User.class)
     @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseInfo createUser(@RequestBody User user) {
 
@@ -55,6 +61,9 @@ public class UserController extends LoginHelper {
      * @param password 新的密码
      * @return 修改成功
      */
+    @ApiOperation(value = "修改用户密码", response = ResponseInfo.class)
+    @ApiImplicitParam(name = "password", value = "新的密码", required = true,
+            paramType = "query", dataType = "String")
     @RequestMapping(path = "password", method = RequestMethod.PUT)
     public ResponseInfo changePassword(@RequestParam String password) {
         User user = getCurrentUser();

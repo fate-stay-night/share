@@ -2,6 +2,7 @@ package xyz.vimtools.share.global.interceptor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 import xyz.vimtools.share.global.code.GlobalCode;
 import xyz.vimtools.share.global.exception.ExceptionUtils;
 import xyz.vimtools.share.global.helper.LoginHelper;
@@ -31,5 +32,19 @@ public class LoginInterceptor implements HandlerInterceptor {
             ExceptionUtils.throwResponseException(GlobalCode.NO_LOGIN);
         }
         return true;
+    }
+
+    @Override
+    public void postHandle(
+            HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
+            throws Exception {
+
+    }
+
+    @Override
+    public void afterCompletion(
+            HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+
     }
 }

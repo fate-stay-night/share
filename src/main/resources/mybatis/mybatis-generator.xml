@@ -59,5 +59,10 @@
             <generatedKey column="id" sqlStatement="SELECT replace(UUID(), '-', '')" type="pre"/>
         </table>
 
+        <!--对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等-->
+        <table schema="share_source" tableName="area" domainObjectName="Area">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
     </context>
 </generatorConfiguration>
